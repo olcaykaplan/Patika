@@ -8,9 +8,9 @@ Konsol çıktısı: Yarıçapı (Yarıçap) olan dairenin alanı: (Alan) şeklin
 
 const r = process.argv.slice(2)
 
-function calculateCircumference(r){
+function calculateCircleArea(r){
     if(Number(r))
     return  `Yarıçapı ${r} olan dairenin alanı: ${Math.PI * Math.pow(r,2)} şeklinde olmalıdır.`;
 }
 
-console.log(calculateCircumference(r))
+console.log(calculateCircleArea(r))

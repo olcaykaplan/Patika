@@ -1,0 +1,28 @@
+{
+  "name": "patika-gusto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olcaykaplan/Patika-Gusto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olcaykaplan/Patika-Gusto/issues"
+  },
+  "homepage": "https://github.com/olcaykaplan/Patika-Gusto#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "prettier": "2.5.1"
+  },
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}

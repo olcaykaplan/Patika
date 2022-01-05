@@ -15,3 +15,11 @@ exports.getAddPage = (req, res) => {
 exports.getPostPage = (req, res) => {
   res.render('post');
 };
+exports.getEditPostPage = async(req, res) => {
+  let post = await Post.findById(req.params.id);
+  res.render('editPost', { post });
+};
+exports.getPostByID = async (req, res) => {
+    const post = await Post.findById(req.params.id);
+    res.render('post', { post });
+  };

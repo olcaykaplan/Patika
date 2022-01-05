@@ -1,9 +1,8 @@
-/*  3. Ödev
-cleanblog-test-db adında bir veri tabanı için mongoose ile gerekli bağlantı bilgilerini yazalım.
-"Add New Post" sayfamızdan göndericeğimiz veriler req.body ile yakalayalım, gerekli middleware fonksiyonarını kullanalım.
-title:String, detail:String, dateCreated:Date(default now) özelliklerine sahip Post modelini oluşturalım.
-Veri tabanımızda 3 adet pos dökümanı oluşturalım.
-Oluşturduğumuz post dökümanlarını Blog sitemizin anasayfasında gösterelim.
+/*  4. Ödev
+index.ejs içerisinde /posts/<%= posts[i]._id %> ile _id bilgisini gönderelim.
+app.js içerisinde GET metoduyla "/posts/:id" ile gönderilen "_id" yi yakalayalım. .
+tekil post bilgilerini post.ejs dosyasına gönderelim.
+post.ejs içerisine post.title, post.detail ve post.dateCreated bilgilerini gönderelim. (her bir post için ayrı image kullanmayacağız)
 */
 
 const express = require('express');
@@ -26,9 +25,8 @@ app.use(express.json());
 
 app.get('/', async (req, res) => {
   const posts = await Post.find();
-  console.log("posts",posts)
   res.render('index', {
-    posts
+    posts,
   });
 });
 app.get('/about', (req, res) => {
@@ -41,9 +39,12 @@ app.get('/post', (req, res) => {
   res.render('post');
 });
 app.post('/posts', async (req, res) => {
-  console.log("req.body",req.body)
   await Post.create(req.body);
   res.redirect('/');
+});
+app.get('/posts/:id', async (req, res) => {
+  const post = await Post.findById(req.params.id)
+  res.render('post', { post });
 });
 
 const PORT = 3000;

@@ -8,13 +8,21 @@ Kodumuzu MVC yapısına göre tekrar düzenleyelim.
 const express = require('express');
 const mongoose = require('mongoose');
 const ejs = require('ejs');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
 const pageControllers = require('./controller/pageController');
 const postControllers = require('./controller/postController');
 const app = express();
+require('dotenv').config();
 
 //Connection
-mongoose.connect('mongodb://localhost/cleanblog-test-db');
+mongoose
+  .connect(process.env.CONNECTION_URL)
+  .then(() => {
+    console.log('DB CONNECTED!');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // Template Engine
 app.set('view engine', 'ejs');
@@ -30,17 +38,14 @@ app.get('/', pageControllers.getHomePage);
 app.get('/about', pageControllers.getAboutPage);
 app.get('/add', pageControllers.getAddPage);
 app.get('/post', pageControllers.getPostPage);
-app.get('/posts/edit/:id', pageControllers.getEditPostPage)
-app.get('/posts/:id',pageControllers.getPostByID);
+app.get('/posts/edit/:id', pageControllers.getEditPostPage);
+app.get('/posts/:id', pageControllers.getPostByID);
 
 // Actions
 app.post('/posts', postControllers.createNewPost);
-app.put('/posts/:id', postControllers.updatePostById)
+app.put('/posts/:id', postControllers.updatePostById);
 
-
-
-
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Port is working on ${PORT} successfully.`);
 });
